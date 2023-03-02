@@ -9,3 +9,8 @@ if (environment.production) {
 }
 
 platformBrowserDynamic().bootstrapModule(AppModule);
+
+
+
+//npm run server
+//npm start
