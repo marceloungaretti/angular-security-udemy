@@ -11,9 +11,7 @@ import { Router } from "@angular/router";
 export class SignupComponent implements OnInit {
 
   form: FormGroup;
-
   errors: string[] = [];
-
   messagePerErrorCode = {
     min: 'The minimum length is 10 characters',
     uppercase: 'At least one upper case character',
@@ -21,8 +19,9 @@ export class SignupComponent implements OnInit {
     "err_user": 'Could not create user'
   };
 
-
-  constructor(private fb: FormBuilder, private authService: AuthService) {
+  constructor(private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router) {
     this.form = this.fb.group({
       email: ['test@gmail.com', Validators.required],
       password: ['Password10', Validators.required],
@@ -31,9 +30,7 @@ export class SignupComponent implements OnInit {
   }
 
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
 
   signUp() {
@@ -43,12 +40,13 @@ export class SignupComponent implements OnInit {
 
       this.authService.signUp(val.email, val.password)
         .subscribe(
-          () => console.log("User created successfully"),
+          () => {
+            this.router.navigateByUrl('/');
+            console.log("User created successfully")
+          },
           response => this.errors = response.error.errors
         );
-
     }
-
   }
 
 }

@@ -1,5 +1,5 @@
 
-import { tap, shareReplay, map, filter } from 'rxjs/operators';
+import { tap, map, filter, shareReplay } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Observable, BehaviorSubject } from "rxjs";
@@ -25,8 +25,13 @@ export class AuthService {
 
   signUp(email: string, password: string) {
     return this.http.post<User>('/api/signup', { email, password }).pipe(
-      shareReplay(),
       tap(user => this.subject.next(user)));
+  }
+
+  logout(): Observable<any> {
+    return this.http.post('/api/logout', null).pipe(
+      shareReplay(),
+      tap(user => this.subject.next(ANONYMOUS_USER)),);
   }
 
 }
