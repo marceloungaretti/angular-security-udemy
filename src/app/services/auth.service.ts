@@ -28,6 +28,12 @@ export class AuthService {
       tap(user => this.subject.next(user)));
   }
 
+  login(email: string, password: string){
+    return this.http.post<User>('/api/login', { email, password }).pipe(
+      tap(user => this.subject.next(user)));
+
+  }
+
   logout(): Observable<any> {
     return this.http.post('/api/logout', null).pipe(
       shareReplay(),
