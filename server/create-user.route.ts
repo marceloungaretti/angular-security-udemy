@@ -30,7 +30,7 @@ async function createUserAndSession(res: Response, credentials) {
   console.log('SESSION ID: ', sessionId);
 
   sessionStore.createSession(sessionId, user);
-  res.cookie("SESSIONID", sessionId, { httpOnly: true });
+  res.cookie("SESSIONID", sessionId, { httpOnly: true, secure: true });
 
   res.status(200).json({ id: user.id, email: user.email });
 }
