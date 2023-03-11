@@ -11,6 +11,8 @@ export function retrieveUserIdFromRequest(req: Request, res: Response, next: Nex
         console.error('err: ', err);
         next();
       });
+  } else {
+    next();
   }
 }
 
