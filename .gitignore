@@ -16,6 +16,8 @@
 *.launch
 .settings/
 *.sublime-workspace
+.env
+/src/environments/environment.local.ts
 
 # IDE - VSCode
 .vscode/*
